@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media Player.Lib", "Media P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media Player.WPF", "Media Player.WPF\Media Player.WPF.csproj", "{7851375E-47B5-425C-B4D1-8709FF1C4E49}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media Player.Tests", "Media Player.Tests\Media Player.Tests.csproj", "{CC215709-2181-4AD8-94F0-78D0C9F0FEEF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7851375E-47B5-425C-B4D1-8709FF1C4E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7851375E-47B5-425C-B4D1-8709FF1C4E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7851375E-47B5-425C-B4D1-8709FF1C4E49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC215709-2181-4AD8-94F0-78D0C9F0FEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC215709-2181-4AD8-94F0-78D0C9F0FEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC215709-2181-4AD8-94F0-78D0C9F0FEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC215709-2181-4AD8-94F0-78D0C9F0FEEF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

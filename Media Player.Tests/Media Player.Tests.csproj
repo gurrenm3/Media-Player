@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F2E54FC0-471D-469F-8ECD-5415E860BEE8}</ProjectGuid>
+    <ProjectGuid>{CC215709-2181-4AD8-94F0-78D0C9F0FEEF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Media_Player.Lib</RootNamespace>
-    <AssemblyName>Media Player.Lib</AssemblyName>
+    <RootNamespace>Media_Player.Tests</RootNamespace>
+    <AssemblyName>Media Player.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -31,9 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -48,7 +45,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\Media Player.Lib\Media Player.Lib.csproj">
+      <Project>{f2e54fc0-471d-469f-8ecd-5415e860bee8}</Project>
+      <Name>Media Player.Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Media Player.WPF\Media Player.WPF.csproj">
+      <Project>{7851375e-47b5-425c-b4d1-8709ff1c4e49}</Project>
+      <Name>Media Player.WPF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
