@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Media_Player.WPF"
         mc:Ignorable="d"
-        Title="Media Player" Height="450" Width="800" ContentRendered="Window_ContentRendered" Closed="Window_Closed">
+        Title="Media Player" Height="450" Width="800" WindowStartupLocation="CenterScreen" ContentRendered="Window_ContentRendered" Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>

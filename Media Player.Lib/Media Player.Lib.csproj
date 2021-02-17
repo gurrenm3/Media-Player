@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="Guard.cs" />
     <Compile Include="JsonSerializer.cs" />
     <Compile Include="Logger.cs" />
@@ -52,5 +53,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
