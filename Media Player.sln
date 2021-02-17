@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media Player.Lib", "Media Player.Lib\Media Player.Lib.csproj", "{F2E54FC0-471D-469F-8ECD-5415E860BEE8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Media Player.WPF", "Media Player.WPF\Media Player.WPF.csproj", "{7851375E-47B5-425C-B4D1-8709FF1C4E49}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F2E54FC0-471D-469F-8ECD-5415E860BEE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2E54FC0-471D-469F-8ECD-5415E860BEE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2E54FC0-471D-469F-8ECD-5415E860BEE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2E54FC0-471D-469F-8ECD-5415E860BEE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7851375E-47B5-425C-B4D1-8709FF1C4E49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7851375E-47B5-425C-B4D1-8709FF1C4E49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7851375E-47B5-425C-B4D1-8709FF1C4E49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7851375E-47B5-425C-B4D1-8709FF1C4E49}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C8A8096A-D4E8-48D9-8534-E68B21F293C1}
+	EndGlobalSection
+EndGlobal
