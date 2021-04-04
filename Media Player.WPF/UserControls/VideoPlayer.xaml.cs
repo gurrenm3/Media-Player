@@ -43,11 +43,11 @@ namespace Media_Player.WPF.UserControls
         {
             MainWindow.instance.OnEnterFullscreen += MainWindow_OnEnterFullscreen;
             MainWindow.instance.OnExitFullscreen += MainWindow_OnExitFullscreen;
+            MainWindow.instance.MouseMove += Instance_MouseMove;
         }
 
-
         bool waiting = false;
-        private async void UserControl_MouseMove(object sender, MouseEventArgs e)
+        private async void Instance_MouseMove(object sender, MouseEventArgs e)
         {
             if (waiting)
                 return;
@@ -66,8 +66,6 @@ namespace Media_Player.WPF.UserControls
                 PauseMedia();
             else
                 PlayMedia();
-
-            MainWindow.instance.EnterFullscreen();
         }
 
         private void ForwardTen_Click(object sender, RoutedEventArgs e)
@@ -106,6 +104,13 @@ namespace Media_Player.WPF.UserControls
         {
             MediaPlayer.Height = _heightBeforeFullscreen;
             MediaPlayer.Width = _widthBeforeFullscreen;
+        }
+
+        private void MediaPlayer_Drop(object sender, DragEventArgs e)
+        {
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            string file = files[0];
+            MediaPlayer.Source = new Uri(file);
         }
     }
 }
