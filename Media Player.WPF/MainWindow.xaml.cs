@@ -100,6 +100,8 @@ namespace Media_Player.WPF
 
             WindowState = WindowState.Maximized;
 
+            ToolbarGrid.Visibility = Visibility.Collapsed;
+
             IsFullscreen = true;
             if (OnEnterFullscreen != null)
                 OnEnterFullscreen.Invoke(this, EventArgs.Empty);
@@ -115,9 +117,19 @@ namespace Media_Player.WPF
             WindowStyle = _windowStyleBeforeFullscreen;
             ResizeMode = ResizeMode.CanResize;
 
+            ToolbarGrid.Visibility = Visibility.Visible;
+
             IsFullscreen = false;
             if (OnExitFullscreen != null)
                 OnExitFullscreen.Invoke(this, EventArgs.Empty);
+        }
+
+        private void FullscreenButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsFullscreen)
+                EnterFullscreen();
+            else
+                ExitFullscreen();
         }
     }
 }
