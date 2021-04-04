@@ -16,9 +16,17 @@ namespace Media_Player.WPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static MainWindow instance;
+        public bool IsFullscreen { get; private set; }
 
+        public static MainWindow instance;
         public VideoPlayer player = new VideoPlayer();
+        public event EventHandler OnEnterFullscreen;
+        public event EventHandler OnExitFullscreen;
+
+        private WindowState _windowStateBeforeFullscreen;
+        private WindowStyle _windowStyleBeforeFullscreen;
+        
+        
 
         public MainWindow()
         {
@@ -65,6 +73,51 @@ namespace Media_Player.WPF
         private void DebugButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Space)
+                player.MediaPlayer.PauseMedia();
+
+            if (e.Key == System.Windows.Input.Key.Escape && IsFullscreen)
+                ExitFullscreen();
+        }
+
+        public void EnterFullscreen()
+        {
+            if (IsFullscreen)
+                return;
+
+            _windowStateBeforeFullscreen = WindowState;
+            _windowStyleBeforeFullscreen = WindowStyle;
+
+            Visibility = Visibility.Collapsed;
+            Topmost = true;
+            WindowStyle = WindowStyle.None;
+            ResizeMode = ResizeMode.NoResize;
+            Visibility = Visibility.Visible;
+
+            WindowState = WindowState.Maximized;
+
+            IsFullscreen = true;
+            if (OnEnterFullscreen != null)
+                OnEnterFullscreen.Invoke(this, EventArgs.Empty);
+        }
+
+        public void ExitFullscreen()
+        {
+            if (!IsFullscreen)
+                return;
+
+            Topmost = false;
+            WindowState = _windowStateBeforeFullscreen;
+            WindowStyle = _windowStyleBeforeFullscreen;
+            ResizeMode = ResizeMode.CanResize;
+
+            IsFullscreen = false;
+            if (OnExitFullscreen != null)
+                OnExitFullscreen.Invoke(this, EventArgs.Empty);
         }
     }
 }

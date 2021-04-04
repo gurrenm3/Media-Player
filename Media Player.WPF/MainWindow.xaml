@@ -7,12 +7,12 @@
         xmlns:local="clr-namespace:Media_Player.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
-        Background="{DynamicResource MaterialDesignDarkBackground}"
+        Background="#FF060606"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Media Player" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
+        Title="Media Player" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closed="Window_Closed" KeyDown="Window_KeyDown">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
@@ -25,7 +25,7 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="ToolbarGrid"  Background="#FF1B1B1B"  Visibility="Visible" Height="50" Grid.ColumnSpan="3">
+        <Grid x:Name="ToolbarGrid"  Visibility="Visible" Height="50" Grid.ColumnSpan="3" Background="#FF673AB7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
@@ -45,7 +45,7 @@
 
 
             <StackPanel Grid.Column="2" Orientation="Horizontal">
-                <TextBlock Text="More" Foreground="#DDFFFFFF" VerticalAlignment="Center" Margin="10,0"/>
+                <TextBlock Text="More" Foreground="#DDFFFFFF" VerticalAlignment="Center" Margin="10,0" Focusable="True" FontSize="16"/>
                 <Rectangle Width="2" Fill="#FFB2B2B2"/>
                 <materialDesign:PopupBox x:Name="MoreDropdown" Foreground="#DDFFFFFF" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
                     <StackPanel VerticalAlignment="Center">
