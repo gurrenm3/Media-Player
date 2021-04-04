@@ -44,22 +44,22 @@
             </Viewbox>
 
 
-            <Viewbox Grid.Column="2">
-                <StackPanel Orientation="Horizontal">
-                    <materialDesign:PopupBox x:Name="MoreDropdown" Foreground="#DDFFFFFF" Margin="0,2,0,2" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
-                        <StackPanel VerticalAlignment="Center"  Margin="0,20,0,20">
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Text="More" Foreground="#DDFFFFFF" VerticalAlignment="Center" Margin="10,0"/>
+                <Rectangle Width="2" Fill="#FFB2B2B2"/>
+                <materialDesign:PopupBox x:Name="MoreDropdown" Foreground="#DDFFFFFF" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel VerticalAlignment="Center">
                         <Button x:Name="GithubButton" Content="Github" HorizontalAlignment="Center" Click="GithubButton_Click"/>
                         <Button x:Name="DiscordButton" Content="Discord" HorizontalAlignment="Center" Click="DiscordButton_Click"/>
                         <!--<Button x:Name="DonateButton" Content="Support the Dev" HorizontalAlignment="Center" Click="DonateButton_Click"/>-->
                         <Button x:Name="DebugButton" Content="View Debug Log" HorizontalAlignment="Center" Click="DebugButton_Click"/>
-                        </StackPanel>
-                    </materialDesign:PopupBox>
-                </StackPanel>
-            </Viewbox>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
         </Grid>
         
         <Grid x:Name="ContentGrid" Grid.Row="1" Grid.Column="1">
-            <!--<uc:VideoPlayer/>-->
+            
         </Grid>
     </Grid>
 </Window>

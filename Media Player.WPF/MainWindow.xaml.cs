@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using Media_Player.Extensions;
 using System.Diagnostics;
+using Media_Player.WPF.UserControls;
 
 namespace Media_Player.WPF
 {
@@ -16,6 +17,8 @@ namespace Media_Player.WPF
     public partial class MainWindow : Window
     {
         public static MainWindow instance;
+
+        public VideoPlayer player = new VideoPlayer();
 
         public MainWindow()
         {
@@ -27,7 +30,7 @@ namespace Media_Player.WPF
 
         private void FinishedLoading(object sender, EventArgs e) //Executed when MainWindow.ContentRendered is called
         {
-            
+            ContentGrid.Children.Add(player);
         }
 
 
