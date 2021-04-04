@@ -3,9 +3,16 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:uc="clr-namespace:Media_Player.WPF.UserControls"
         xmlns:local="clr-namespace:Media_Player.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignDarkBackground}"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Media Player" Height="450" Width="800" WindowStartupLocation="CenterScreen" ContentRendered="Window_ContentRendered" Closed="Window_Closed">
+        Title="Media Player" Height="450" Width="800" WindowStartupLocation="CenterScreen" Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
@@ -13,13 +20,46 @@
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
+        <Grid x:Name="ToolbarGrid"  Background="#FF1B1B1B"  Visibility="Visible" Height="50" Grid.ColumnSpan="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox>
+                <materialDesign:PopupBox x:Name="FileDropwon" Foreground="#DDFFFFFF" Margin="5,2,0,2" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <materialDesign:PopupBox.ToggleContent>
+                        <materialDesign:PackIcon Kind="ReorderHorizontal" Foreground="White"/>
+                    </materialDesign:PopupBox.ToggleContent>
+                    <StackPanel VerticalAlignment="Center">
+                        
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </Viewbox>
+
+
+            <Viewbox Grid.Column="2">
+                <StackPanel Orientation="Horizontal">
+                    <materialDesign:PopupBox x:Name="MoreDropdown" Foreground="#DDFFFFFF" Margin="0,2,0,2" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                        <StackPanel VerticalAlignment="Center"  Margin="0,20,0,20">
+                        <Button x:Name="GithubButton" Content="Github" HorizontalAlignment="Center" Click="GithubButton_Click"/>
+                        <Button x:Name="DiscordButton" Content="Discord" HorizontalAlignment="Center" Click="DiscordButton_Click"/>
+                        <!--<Button x:Name="DonateButton" Content="Support the Dev" HorizontalAlignment="Center" Click="DonateButton_Click"/>-->
+                        <Button x:Name="DebugButton" Content="View Debug Log" HorizontalAlignment="Center" Click="DebugButton_Click"/>
+                        </StackPanel>
+                    </materialDesign:PopupBox>
+                </StackPanel>
+            </Viewbox>
+        </Grid>
+        
         <Grid x:Name="ContentGrid" Grid.Row="1" Grid.Column="1">
-            
+            <!--<uc:VideoPlayer/>-->
         </Grid>
     </Grid>
 </Window>

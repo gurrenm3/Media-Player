@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Media_Player.Extensions;
+using System.Diagnostics;
 
 namespace Media_Player.WPF
 {
@@ -20,13 +22,18 @@ namespace Media_Player.WPF
             InitializeComponent();
             instance = this;
             Logger.MessageLogged += Logger_MessageLogged;
+            ContentRendered += FinishedLoading;
+        }
+
+        private void FinishedLoading(object sender, EventArgs e) //Executed when MainWindow.ContentRendered is called
+        {
+            
         }
 
 
         public static void RunOnUIThread(Action action) => instance.Dispatcher.Invoke(action);
-        private void Window_ContentRendered(object sender, EventArgs e) => FinishedLoading();
-        private void Window_Closed(object sender, EventArgs e) => Application.Current.Shutdown();
 
+        private void Window_Closed(object sender, EventArgs e) => Application.Current.Shutdown();
 
         private void Logger_MessageLogged(object sender, Logger.LogEvents e)
         {
@@ -42,7 +49,17 @@ namespace Media_Player.WPF
             });
         }
 
-        private void FinishedLoading()
+        private void GithubButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://github.com/gurrenm3/Media-Player");
+        }
+
+        private void DiscordButton_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("https://discord.com/invite/GkdDrGr");
+        }
+
+        private void DebugButton_Click(object sender, RoutedEventArgs e)
         {
 
         }
