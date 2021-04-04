@@ -5,8 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Media_Player.WPF.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" MouseMove="UserControl_MouseMove">
+    <UserControl.Resources>
+        <Image x:Key="PlayArrow" Source="../Resources/play arrow.png"/>
+        <Image x:Key="ForwardTen" Source="../Resources/Fast Forward 10 White.png"/>
+        <Image x:Key="RewindTen" Source="../Resources/Rewind 10 White.png"/>
+    </UserControl.Resources>
     <Grid>
-        <MediaElement Source="H:\So I'm a Spider, So What - 12.mp4" IsMuted="True"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <MediaElement Grid.RowSpan="2" x:Name="Player" Source="H:\So I'm a Spider, So What - 12.mp4" IsMuted="True"/>
+
+        <StackPanel x:Name="ControlsPanel" Grid.Row="1" VerticalAlignment="Bottom" Margin="10,5" Orientation="Horizontal">
+            <Button x:Name="PlayButton" HorizontalAlignment="Left" Content="{StaticResource PlayArrow}" Click="PlayButton_Click" Height="48" />
+            <Button x:Name="ForwardTen" HorizontalAlignment="Left" Content="{StaticResource ForwardTen}" Click="ForwardTen_Click" Height="48" Margin="10,0"/>
+            <Button x:Name="RewindTen" HorizontalAlignment="Left" Content="{StaticResource RewindTen}" Click="RewindTen_Click" Height="48"/>
+        </StackPanel>
     </Grid>
 </UserControl>
