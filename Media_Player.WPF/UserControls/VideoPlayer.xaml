@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Media_Player.WPF.UserControls.VideoPlayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:uc="clr-namespace:Media_Player.WPF.UserControls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ffme="clr-namespace:Unosquare.FFME;assembly=ffme.win"
+             xmlns:local="clr-namespace:Media_Player.WPF.UserControls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800" Loaded="UserControl_Loaded" SizeChanged="UserControl_SizeChanged">
+    <UserControl.Resources>
+        <Image x:Key="PlayArrow" Source="../Resources/play arrow.png"/>
+        <Image x:Key="ForwardTen" Source="../Resources/Fast Forward 10 White.png"/>
+        <Image x:Key="RewindTen" Source="../Resources/Rewind 10 White.png"/>
+    </UserControl.Resources>
+    <Grid MouseDown="Grid_MouseDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <ffme:MediaElement x:Name="MediaPlayer" Grid.RowSpan="2" LoadedBehavior="Play" AllowDrop="True" Drop="MediaDropped_Drop" MouseDoubleClick="MediaPlayer_MouseDoubleClick" PreviewMouseDown="MediaPlayer_PreviewMouseDown"/>
+
+        <Grid x:Name="ControlsGrid" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Slider x:Name="TimeSlider" Grid.Row="1" Maximum="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#FFCBCBCB" ValueChanged="TimeSlider_ValueChanged" PreviewMouseDown="TimeSlider_PreviewMouseDown" PreviewMouseUp="TimeSlider_PreviewMouseUp"/>
+        </Grid>
+        <StackPanel x:Name="ControlsPanel" Grid.Row="1" VerticalAlignment="Bottom" Margin="10,5" Orientation="Horizontal">
+            <Button x:Name="PlayButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{StaticResource PlayArrow}" Click="PlayButton_Click" Height="48" Width="100"/>
+            <Button x:Name="RewindTen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{StaticResource RewindTen}" Click="RewindTen_Click" Height="48" Margin="10,0" Width="100"/>
+            <Button x:Name="ForwardTen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{StaticResource ForwardTen}" Click="ForwardTen_Click" Height="48" Width="100"/>
+
+            <local:VolumeController x:Name="VolumeController" Margin="10,0" MouseLeave="VolumeController_MouseLeave" Width="100"/>
+            <!--<materialDesign:PopupBox x:Name="VolumeControl_Popup" Foreground="#DDFFFFFF" Margin="5,2,0,2" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Background="#FF673AB7">
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="Audio" Visibility="Hidden" Foreground="White" Background="#FF673AB7" HorizontalAlignment="Center" Height="44" VerticalAlignment="Center"/>
+                </materialDesign:PopupBox.ToggleContent>
+
+                <Slider Maximum="100" Orientation="Vertical" Height="150"/>
+            </materialDesign:PopupBox>
+            <Button x:Name="VolumeControl_Button" HorizontalAlignment="Left" Content="Sound" Click="VolumeControl_Button_Click" Height="48" Margin="10,0"/>-->
+        </StackPanel>
+        
+    </Grid>
+</UserControl>
