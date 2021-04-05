@@ -10,7 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\AssemblyExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Guard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\BitmapExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\BitmapImageExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
   </ItemGroup>
 </Project>

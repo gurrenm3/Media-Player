@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Media_Player.Lib
+namespace Media_Player
 {
     public class Logger
     {
