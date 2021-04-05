@@ -4,9 +4,60 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Media_Player.WPF"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:uc="clr-namespace:Media_Player.WPF.UserControls"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="#FF060606"
+        TextElement.FontWeight="Medium"
+        TextElement.FontSize="14"
+        FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Media Player" Height="450" Width="800" WindowStartupLocation="CenterScreen" AllowDrop="True" Closing="Window_Closing" KeyDown="Window_KeyDown" ContentRendered="FinishedLoading" MouseDoubleClick="Window_MouseDoubleClick" MouseDown="Window_MouseDown">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5"/>
+        </Grid.RowDefinitions>
 
+        <Grid x:Name="ToolbarGrid"  Visibility="Visible" Height="50" Grid.ColumnSpan="3" Background="#FF673AB7">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <materialDesign:PopupBox x:Name="FileDropwon" Foreground="#DDFFFFFF" Margin="5,2,0,2" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                <materialDesign:PopupBox.ToggleContent>
+                    <materialDesign:PackIcon Kind="ReorderHorizontal" Foreground="White"/>
+                </materialDesign:PopupBox.ToggleContent>
+                <StackPanel VerticalAlignment="Center">
+                    <Button x:Name="FullscreenButton" Content="Fullscreen" Click="FullscreenButton_Click"/>
+                </StackPanel>
+            </materialDesign:PopupBox>
+
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <TextBlock Text="More" Foreground="#DDFFFFFF" VerticalAlignment="Center" Margin="10,0" Focusable="True" FontSize="16"/>
+                <Rectangle Width="2" Fill="#FFB2B2B2"/>
+                <materialDesign:PopupBox x:Name="MoreDropdown" Foreground="#DDFFFFFF" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+                    <StackPanel VerticalAlignment="Center">
+                        <Button x:Name="GithubButton" Content="Github" HorizontalAlignment="Center" Click="GithubButton_Click"/>
+                        <Button x:Name="DiscordButton" Content="Discord" HorizontalAlignment="Center" Click="DiscordButton_Click"/>
+                        <!--<Button x:Name="DonateButton" Content="Support the Dev" HorizontalAlignment="Center" Click="DonateButton_Click"/>-->
+                        <Button x:Name="DebugButton" Content="View Debug Log" HorizontalAlignment="Center" Click="DebugButton_Click"/>
+                    </StackPanel>
+                </materialDesign:PopupBox>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="ContentGrid" Grid.Row="1" Grid.Column="1">
+            <uc:VideoPlayer x:Name="player"/>
+        </Grid>
     </Grid>
 </Window>
