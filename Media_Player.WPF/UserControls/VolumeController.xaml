@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Media_Player.WPF.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="185" d:DesignWidth="65">
+             d:DesignHeight="185" d:DesignWidth="65" MouseLeave="UserControl_MouseLeave" Loaded="UserControl_Loaded">
     <UserControl.Resources>
-        <Image x:Key="AudioIcon" Source="../Resources/audio icon_edited.png"/>
+        <Image x:Key="AudioIcon" Source="../Resources/audio icon_edited.png" Height="24" Width="37"/>
     </UserControl.Resources>
     
     <Grid x:Name="MainGrid">
@@ -16,8 +16,8 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Rectangle x:Name="MouseDetection_Rectangle" Grid.RowSpan="2" MouseLeave="MouseDetection_Rectangle_MouseLeave" Fill="#00000000"/>
-        <Slider x:Name="VolumeSlider" Visibility="Hidden" Value="0.7" Maximum="1" Orientation="Vertical" HorizontalAlignment="Center" Height="115" Foreground="White" MouseEnter="VolumeController_MouseEnter" ValueChanged="VolumeSlider_ValueChanged"/>
-        <Button x:Name="VolumeControl_Button" Grid.Row="1" Content="{StaticResource AudioIcon}" Height="48" Margin="0,7,0,0" MouseEnter="VolumeController_MouseEnter" Click="VolumeControl_Button_Click"/>
+        <Rectangle x:Name="MouseDetection_Rectangle" Grid.RowSpan="2" Fill="#00000000"/>
+        <Slider x:Name="VolumeSlider" Visibility="Hidden" Value="0.7" Maximum="1" Orientation="Vertical" HorizontalAlignment="Center" Height="115" Foreground="White" MouseEnter="VolumeController_MouseEnter" ValueChanged="VolumeSlider_ValueChanged" Focusable="False"/>
+        <Button x:Name="VolumeControl_Button" Grid.Row="1" Content="{StaticResource AudioIcon}" Height="48" Margin="0,7,0,0" MouseEnter="VolumeController_MouseEnter" Click="VolumeControl_Button_Click" Focusable="False"/>
     </Grid>
 </UserControl>

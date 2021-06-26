@@ -121,8 +121,14 @@
   <data name="audio_icon_edited" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\audio icon_edited.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ExitFullscreen_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExitFullscreen icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Fast_Forward_10_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Fast Forward 10 White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Fullscreen_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Fullscreen icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pause_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pause icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -132,5 +138,8 @@
   </data>
   <data name="Rewind_10_White" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Rewind 10 White.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Sound_muted" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Sound muted.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

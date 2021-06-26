@@ -16,10 +16,13 @@
 
   <ItemGroup>
     <None Remove="Resources\audio icon_edited.png" />
+    <None Remove="Resources\ExitFullscreen icon.png" />
     <None Remove="Resources\Fast Forward 10 White.png" />
+    <None Remove="Resources\Fullscreen icon.png" />
     <None Remove="Resources\pause icon.png" />
     <None Remove="Resources\play arrow.png" />
     <None Remove="Resources\Rewind 10 White.png" />
+    <None Remove="Resources\Sound muted.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,10 +32,13 @@
 
   <ItemGroup>
     <Resource Include="Resources\audio icon_edited.png" />
+    <Resource Include="Resources\ExitFullscreen icon.png" />
     <Resource Include="Resources\Fast Forward 10 White.png" />
+    <Resource Include="Resources\Fullscreen icon.png" />
     <Resource Include="Resources\pause icon.png" />
     <Resource Include="Resources\play arrow.png" />
     <Resource Include="Resources\Rewind 10 White.png" />
+    <Resource Include="Resources\Sound muted.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +54,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <Import Project="..\Media_Player.Shared\Media_Player.Shared.projitems" Label="Shared" />

@@ -73,9 +73,29 @@ namespace Media_Player.WPF.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ExitFullscreen_icon {
+            get {
+                object obj = ResourceManager.GetObject("ExitFullscreen_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Fast_Forward_10_White {
             get {
                 object obj = ResourceManager.GetObject("Fast_Forward_10_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Fullscreen_icon {
+            get {
+                object obj = ResourceManager.GetObject("Fullscreen_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -106,6 +126,16 @@ namespace Media_Player.WPF.Properties {
         internal static System.Drawing.Bitmap Rewind_10_White {
             get {
                 object obj = ResourceManager.GetObject("Rewind_10_White", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Sound_muted {
+            get {
+                object obj = ResourceManager.GetObject("Sound_muted", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

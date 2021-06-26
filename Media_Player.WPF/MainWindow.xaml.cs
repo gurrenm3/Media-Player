@@ -6,6 +6,8 @@ using System.Windows;
 using System.Windows.Input;
 using Media_Player.Extensions;
 using System.Windows.Controls;
+using System.IO;
+using Media_Player.WPF.Views;
 
 namespace Media_Player.WPF
 {
@@ -27,7 +29,7 @@ namespace Media_Player.WPF
 
         #region Fields
         public static MainWindow instance;
-        //public VideoPlayer player = new VideoPlayer();
+        public MediaPlayerView mediaPlayerView;
         public event EventHandler OnEnterFullscreen;
         public event EventHandler OnExitFullscreen;
 
@@ -46,9 +48,27 @@ namespace Media_Player.WPF
 
         private void FinishedLoading(object sender, EventArgs e) //Executed when MainWindow.ContentRendered is called
         {
-            //ContentGrid.Children.Add(player);
+            mediaPlayerView = new MediaPlayerView();
+            contentGrid.Children.Add(mediaPlayerView);
+            mediaPlayerView.MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+            mediaPlayerView.MediaPlayer.MediaOpening += MediaPlayer_MediaOpening;
         }
 
+        private void MediaPlayer_MediaOpening(object sender, Unosquare.FFME.Common.MediaOpeningEventArgs e)
+        {
+            MediaTitle_TextBlock.Dispatcher.Invoke(() => MediaTitle_TextBlock.Text = "Loading...");
+        }
+
+        private void MediaPlayer_MediaOpened(object sender, Unosquare.FFME.Common.MediaOpenedEventArgs e)
+        {
+            var fileName = new FileInfo(e.Info.MediaSource).Name;
+
+            const int maxLength = 80;
+            if (fileName.Length > maxLength)
+                fileName = $"{fileName.Remove(maxLength)}...";
+
+            MediaTitle_TextBlock.Text = fileName;
+        }
 
         public static void RunOnUIThread(Action action) => instance.Dispatcher.Invoke(action);
 
@@ -80,13 +100,18 @@ namespace Media_Player.WPF
 
         private void DebugButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private async void Window_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Space)
-                await player.MediaPlayer.Pause();
+            {
+                if (mediaPlayerView.IsMediaPlaying)
+                    await mediaPlayerView.Pause();
+                else
+                    await mediaPlayerView.Play();
+            }
 
             if (e.Key == Key.Escape && Fullscreen)
                 SetFullscreen(false);
@@ -161,15 +186,25 @@ namespace Media_Player.WPF
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            player.VolumeController.VolumeSlider.Visibility = Visibility.Hidden;
+            mediaPlayerView.VolumeController.VolumeSlider.Visibility = Visibility.Hidden;
         }
 
         private async void player_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (player.MediaPlayer.IsPlaying)
-                await player.Pause();
+            if (mediaPlayerView.MediaPlayer.IsPlaying)
+                await mediaPlayerView.Pause();
             else
-                await player.Play();
+                await mediaPlayerView.Play();
+        }
+
+        private void DonateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void browseForMedia_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

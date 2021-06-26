@@ -6,13 +6,34 @@
         xmlns:local="clr-namespace:Media_Player.WPF"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
         xmlns:uc="clr-namespace:Media_Player.WPF.UserControls"
+        xmlns:views="clr-namespace:Media_Player.WPF.Views"
+        xmlns:viewModels="clr-namespace:Media_Player.WPF.ViewModels"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         Background="#FF060606"
         TextElement.FontWeight="Medium"
         TextElement.FontSize="14"
         FontFamily="{materialDesign:MaterialDesignFont}"
         mc:Ignorable="d"
-        Title="Media Player" Height="450" Width="800" WindowStartupLocation="CenterScreen" AllowDrop="True" Closing="Window_Closing" KeyDown="Window_KeyDown" ContentRendered="FinishedLoading" MouseDoubleClick="Window_MouseDoubleClick" MouseDown="Window_MouseDown">
+        Title="Media Player"
+        Height="720"
+        Width="1280"
+        WindowStartupLocation="CenterScreen"
+        AllowDrop="True" 
+        Closing="Window_Closing"
+        KeyDown="Window_KeyDown"
+        ContentRendered="FinishedLoading" 
+        MouseDoubleClick="Window_MouseDoubleClick"
+        MouseDown="Window_MouseDown">
+    
+    <Window.Resources>
+        <DataTemplate x:Name="mediaPlayerTemplate" DataType="{x:Type viewModels:MediaPlayerViewModel}">
+            <views:MediaPlayerView DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate x:Name="mediaBrowserTemplate" DataType="{x:Type viewModels:MediaBrowserViewModel}">
+            <views:MediaBrowserView DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+    
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5"/>
@@ -25,39 +46,95 @@
             <RowDefinition Height="5"/>
         </Grid.RowDefinitions>
 
-        <Grid x:Name="ToolbarGrid"  Visibility="Visible" Height="50" Grid.ColumnSpan="3" Background="#FF673AB7">
+        <Grid x:Name="ToolbarGrid"
+              Visibility="Visible"
+              Height="50" Grid.ColumnSpan="3" 
+              Background="#FF673AB7">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
 
-            <materialDesign:PopupBox x:Name="FileDropwon" Foreground="#DDFFFFFF" Margin="5,2,0,2" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+            <materialDesign:PopupBox x:Name="FileDropwon"
+                                     Foreground="#DDFFFFFF" Margin="5,2,0,2"
+                                     BorderThickness="0"
+                                     PlacementMode="BottomAndAlignRightEdges" 
+                                     StaysOpen="False">
+                
                 <materialDesign:PopupBox.ToggleContent>
                     <materialDesign:PackIcon Kind="ReorderHorizontal" Foreground="White"/>
                 </materialDesign:PopupBox.ToggleContent>
+                
                 <StackPanel VerticalAlignment="Center">
-                    <Button x:Name="FullscreenButton" Content="Fullscreen" Click="FullscreenButton_Click"/>
+                    <Button x:Name="FullscreenButton"
+                            Content="Fullscreen"
+                            Click="FullscreenButton_Click" 
+                            Focusable="False"/>
+
+                    <Button x:Name="browseForMedia"
+                            Content="Browse For Media"
+                            Click="browseForMedia_Click" 
+                            Focusable="False"/>
                 </StackPanel>
             </materialDesign:PopupBox>
 
+            <TextBlock x:Name="MediaTitle_TextBlock"
+                       Text="" VerticalAlignment="Center" 
+                       HorizontalAlignment="Center" Grid.ColumnSpan="3"
+                       FontSize="18"
+                       Foreground="#DDF0F0F0" 
+                       FontFamily="Yu Gothic UI"/>
 
-            <StackPanel Grid.Column="2" Orientation="Horizontal">
-                <TextBlock Text="More" Foreground="#DDFFFFFF" VerticalAlignment="Center" Margin="10,0" Focusable="True" FontSize="16"/>
-                <Rectangle Width="2" Fill="#FFB2B2B2"/>
-                <materialDesign:PopupBox x:Name="MoreDropdown" Foreground="#DDFFFFFF" BorderThickness="0" PlacementMode="BottomAndAlignRightEdges" StaysOpen="False">
+            <StackPanel Grid.Column="2" 
+                        Orientation="Horizontal">
+                
+                <TextBlock Text="More"
+                           Foreground="#DDFFFFFF"
+                           VerticalAlignment="Center" 
+                           Margin="10,0" Focusable="True" 
+                           FontSize="16"/>
+                
+                <Rectangle Width="2"
+                           Fill="#FFB2B2B2"/>
+                
+                <materialDesign:PopupBox x:Name="MoreDropdown"
+                                         Foreground="#DDFFFFFF"
+                                         BorderThickness="0"
+                                         PlacementMode="BottomAndAlignRightEdges"
+                                         StaysOpen="False">
+                    
                     <StackPanel VerticalAlignment="Center">
-                        <Button x:Name="GithubButton" Content="Github" HorizontalAlignment="Center" Click="GithubButton_Click"/>
-                        <Button x:Name="DiscordButton" Content="Discord" HorizontalAlignment="Center" Click="DiscordButton_Click"/>
-                        <!--<Button x:Name="DonateButton" Content="Support the Dev" HorizontalAlignment="Center" Click="DonateButton_Click"/>-->
-                        <Button x:Name="DebugButton" Content="View Debug Log" HorizontalAlignment="Center" Click="DebugButton_Click"/>
+                        <Button x:Name="GithubButton"
+                                Content="Github"
+                                HorizontalAlignment="Center"
+                                Click="GithubButton_Click"
+                                Focusable="False"/>
+                        
+                        <Button x:Name="DiscordButton" 
+                                Content="Discord"
+                                HorizontalAlignment="Center"
+                                Click="DiscordButton_Click"
+                                Focusable="False"/>
+                        
+                        <Button x:Name="DonateButton"
+                                Content="Support the Dev"
+                                HorizontalAlignment="Center" 
+                                Click="DonateButton_Click"/>
+                        
+                        <Button x:Name="DebugButton"
+                                Content="View Debug Log"
+                                HorizontalAlignment="Center"
+                                Click="DebugButton_Click" 
+                                Focusable="False"/>
                     </StackPanel>
                 </materialDesign:PopupBox>
             </StackPanel>
         </Grid>
 
-        <Grid x:Name="ContentGrid" Grid.Row="1" Grid.Column="1">
-            <uc:VideoPlayer x:Name="player"/>
+        <Grid x:Name="contentGrid" Grid.Row="1" Grid.Column="1">
+            <!--<uc:VideoPlayer x:Name="player"/>-->
         </Grid>
     </Grid>
 </Window>

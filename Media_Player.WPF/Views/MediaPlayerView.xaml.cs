@@ -1,22 +1,21 @@
-﻿/*using Media_Player.Extensions;
+﻿using Media_Player.Extensions;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
-namespace Media_Player.WPF.UserControls
+namespace Media_Player.WPF.Views
 {
     /// <summary>
-    /// Interaction logic for VideoPlayer.xaml
+    /// Interaction logic for MediaPlayerView.xaml
     /// </summary>
-    public partial class VideoPlayer : UserControl
+    public partial class MediaPlayerView : UserControl
     {
         public bool IsMediaPlaying { get { return MediaPlayer.IsPlaying; } }
+        string debugMediaPath = @"H:\So I'm a Spider, So What - 12.mp4";
 
         double _heightBeforeFullscreen;
         double _widthBeforeFullscreen;
@@ -28,14 +27,14 @@ namespace Media_Player.WPF.UserControls
         const int defaultWaitTime = 1500;
         // =======
 
-        public VideoPlayer()
+
+        public MediaPlayerView()
         {
             InitializeComponent();
             HideControls();
             MediaPlayer.AllowDrop = true;
             MediaPlayer.IsMuted = true;
         }
-
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
         {
@@ -48,7 +47,10 @@ namespace Media_Player.WPF.UserControls
             MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             MediaPlayer.PositionChanged += MediaPlayer_PositionChanged;
 
-            await MediaPlayer.Open(@"H:\So I'm a Spider, So What - 12.mp4");
+            if (File.Exists(debugMediaPath))
+            {
+                await MediaPlayer.Open(debugMediaPath);
+            }
         }
 
         public void HideControls(bool hideCursor = true)
@@ -118,7 +120,7 @@ namespace Media_Player.WPF.UserControls
             await MediaPlayer.Open(file);
         }
 
-        
+
         private async void MainWindow_MouseMove(object sender, MouseEventArgs e)
         {
             _currentWaitTime = defaultWaitTime;
@@ -127,7 +129,7 @@ namespace Media_Player.WPF.UserControls
 
             _waiting = true;
             ShowControls();
-            await Task.Factory.StartNew(() => 
+            await Task.Factory.StartNew(() =>
             {
                 while (_currentWaitTime > 0)
                 {
@@ -236,4 +238,4 @@ namespace Media_Player.WPF.UserControls
             MediaPlayer.Focus();
         }
     }
-}*/
+}
