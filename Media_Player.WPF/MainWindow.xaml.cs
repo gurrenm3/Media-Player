@@ -30,6 +30,7 @@ namespace Media_Player.WPF
         #region Fields
         public static MainWindow instance;
         public MediaPlayerView mediaPlayerView;
+        public MediaBrowserView mediaBrowser;
         public event EventHandler OnEnterFullscreen;
         public event EventHandler OnExitFullscreen;
 
@@ -49,7 +50,8 @@ namespace Media_Player.WPF
         private void FinishedLoading(object sender, EventArgs e) //Executed when MainWindow.ContentRendered is called
         {
             mediaPlayerView = new MediaPlayerView();
-            contentGrid.Children.Add(mediaPlayerView);
+            mediaBrowser = new MediaBrowserView();
+            contentGrid.Children.Add(mediaBrowser);
             mediaPlayerView.MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
             mediaPlayerView.MediaPlayer.MediaOpening += MediaPlayer_MediaOpening;
         }

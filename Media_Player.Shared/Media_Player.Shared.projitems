@@ -14,5 +14,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\BitmapImageExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TimeSpanExt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Logger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MediaEpisode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MediaItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MediaSeason.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MediaSeries.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MediaThumbnail.cs" />
   </ItemGroup>
 </Project>

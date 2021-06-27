@@ -6,7 +6,40 @@
              xmlns:local="clr-namespace:Media_Player.WPF.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="MediaElement_Button" TargetType="Button">
+            <Setter Property="Background" Value="Red"/>
+            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="Margin" Value="25, 10"/>            
+        </Style>
+        
+    </UserControl.Resources>
     <Grid>
-            
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                
+                <Button Style="{DynamicResource ResourceKey=MediaElement_Button}"/>
+                <Button Grid.Column="1" Style="{DynamicResource ResourceKey=MediaElement_Button}"/>
+                <Button Grid.Column="2" Style="{DynamicResource ResourceKey=MediaElement_Button}"/>
+                <Button Grid.Column="3" Style="{DynamicResource ResourceKey=MediaElement_Button}"/>
+                <Button Grid.Column="4" Style="{DynamicResource ResourceKey=MediaElement_Button}"/>
+                <Button Grid.Column="5" Style="{DynamicResource ResourceKey=MediaElement_Button}"/>
+            </Grid>
+        </ScrollViewer>
     </Grid>
 </UserControl>

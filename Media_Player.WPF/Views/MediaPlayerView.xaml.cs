@@ -31,7 +31,7 @@ namespace Media_Player.WPF.Views
         public MediaPlayerView()
         {
             InitializeComponent();
-            HideControls();
+            HideControls(false);
             MediaPlayer.AllowDrop = true;
             MediaPlayer.IsMuted = true;
         }
