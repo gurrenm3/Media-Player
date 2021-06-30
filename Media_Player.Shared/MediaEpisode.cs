@@ -11,10 +11,10 @@ namespace Media_Player.Shared
             {"und", "Undefined" }, {"eng","English"}, {"jpn", "Japanese"}
         };
 
+        public List<string> Languges { get; private set; } = new List<string>();
         public MediaSeries ParentSeries { get; private set; }
         public MediaSeason ParentSeason { get; private set; }
         public string EpisodeFilePath { get; private set; }
-        public List<string> Languges { get; private set; } = new List<string>();
 
         public string EpisodeName { get; set; }
         public string EpisodeDescription { get; set; }
@@ -85,9 +85,16 @@ namespace Media_Player.Shared
             {
                 langAbbreviation = langFullName;
             }
-            else if (languageAbbreviations.ContainsValue(langFullName))
-            { 
-                languageAbbreviations.TryGetValue(langFullName, out langAbbreviation);
+            else
+            {
+                foreach (var item in languageAbbreviations)
+                {
+                    if (item.Value == langFullName)
+                    {
+                        langAbbreviation = item.Key;
+                        break;
+                    }
+                }
             }
 
             if (string.IsNullOrEmpty(langAbbreviation))

@@ -51,7 +51,7 @@ namespace Media_Player.WPF.Extensions
             return languages;
         }
 
-        public static string GetSelectedAudio(this MediaInfo mediaInfo)
+        /*public static string GetSelectedAudio(this MediaInfo mediaInfo)
         {
             mediaInfo.BestStreams.TryGetValue(FFmpeg.AutoGen.AVMediaType.AVMEDIA_TYPE_AUDIO, out var selectedStream);
             return selectedStream?.Language;
@@ -61,6 +61,6 @@ namespace Media_Player.WPF.Extensions
         {
             mediaInfo.BestStreams.TryGetValue(FFmpeg.AutoGen.AVMediaType.AVMEDIA_TYPE_SUBTITLE, out var selectedStream);
             return selectedStream?.Language;
-        }
+        }*/
     }
 }

@@ -20,6 +20,8 @@ namespace Media_Player.WPF.Views
     public partial class MediaPlayerView : UserControl
     {
         public bool IsMediaPlaying { get { return mediaPlayer.IsPlaying; } }
+        public bool IsMediaInfoShowing { get { return mediaInfoPopup.Content != null; } }
+
         //string debugMediaPath = @"H:\So I'm a Spider, So What - 12.mp4";
         string debugMediaPath = @"H:\My Hero Academia\Season 4\My Hero Academia S04 1080p Dual Audio BDRip 10 bits DD x265-EMBER\S04E03-Boy Meets... [1450FC0B].mkv";
 
@@ -273,6 +275,16 @@ namespace Media_Player.WPF.Views
         public void HideMediaInfoPopup()
         {
             mediaPopupBox.Content = null;
+        }
+
+        private void UserControl_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            //Debug.WriteLine(e.OriginalSource.GetType().Name);
+        }
+
+        private void popupGrid_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            
         }
     }
 }

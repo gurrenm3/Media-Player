@@ -191,6 +191,15 @@ namespace Media_Player.WPF
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             mediaPlayerView.volumeController.VolumeSlider.Visibility = Visibility.Hidden;
+
+            Debug.WriteLine(e.GetPosition(mediaPlayerView.mediaInfoPopup));
+            /*if ()
+            {
+
+            }*/
+            /*var senderType = e.OriginalSource.GetType();
+            if ((senderType == typeof(Border) || senderType == typeof(Grid)) && mediaPlayerView.IsMediaInfoShowing)
+                mediaPlayerView.HideMediaInfoPopup();*/
         }
 
         private async void player_MouseDown(object sender, MouseButtonEventArgs e)

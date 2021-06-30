@@ -1,4 +1,5 @@
-﻿using Media_Player.Shared;
+﻿using Media_Player.Extensions;
+using Media_Player.Shared;
 using Media_Player.WPF.Extensions;
 using System;
 using System.Collections.Generic;
@@ -35,11 +36,11 @@ namespace Media_Player.WPF.UserControls
 
         public MediaInfoPopup(MediaInfo currentMedia, MediaElement mediaPlayer) : this()
         {
-            episode = currentMedia.ToMediaEpisode();
-            ShowEpisodeInfo(episode);
-
             player = mediaPlayer;
             mediaPlayer.MediaChanging += MediaPlayer_MediaChanging;
+
+            episode = currentMedia.ToMediaEpisode();
+            ShowEpisodeInfo(episode);
         }
 
         private void ShowEpisodeInfo(MediaEpisode episode)
@@ -60,8 +61,17 @@ namespace Media_Player.WPF.UserControls
                 languangesComboBox.Items.Add("Default");
             }
 
-            languangesComboBox.SelectedIndex = 0;
-            selectedlang = languangesComboBox.SelectedItem.ToString();
+            var audioTrack = player.GetSelectedAudio()?.Language;
+            selectedlang = episode.GetLanguageFullName(audioTrack);
+
+            for (int i = 0; i < languangesComboBox.Items.Count; i++)
+            {
+                if (selectedlang == languangesComboBox.Items[i].ToString())
+                {
+                    languangesComboBox.SelectedIndex = i;
+                    break;
+                }
+            }
         }
 
         private void languangesComboBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -79,7 +89,8 @@ namespace Media_Player.WPF.UserControls
 
             selectedlang = languangesComboBox.SelectedItem.ToString();
 
-            player.ChangeMedia();
+            if (player.GetSelectedAudio()?.Language != episode.GetLanguageAbbreviation(selectedlang))
+                player.ChangeMedia();
         }
 
         private void MediaPlayer_MediaChanging(object sender, MediaOpeningEventArgs e)
@@ -89,11 +100,12 @@ namespace Media_Player.WPF.UserControls
 
         private void HandleChangeAudioLanguage(MediaOpeningEventArgs e)
         {
-            string currentLang = e.Info.GetSelectedAudio();
+            string currentLang = player.GetSelectedAudio()?.Language;
             if (currentLang.ToLower() == selectedlang.ToLower())
                 return;
 
             string langAbbreviation = episode.GetLanguageAbbreviation(selectedlang);
+            
             var newStream = e.Info.Streams.FirstOrDefault(stream => stream.Value.Language == langAbbreviation);
 
             if (newStream.Value == null)

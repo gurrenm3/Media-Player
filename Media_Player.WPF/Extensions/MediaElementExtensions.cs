@@ -1,7 +1,9 @@
 ﻿using Media_Player.Shared;
 using System;
+using System.IO.Packaging;
 using System.Threading.Tasks;
 using Unosquare.FFME;
+using StreamInfo = Unosquare.FFME.Common.StreamInfo;
 
 namespace Media_Player.Extensions
 {
@@ -22,6 +24,16 @@ namespace Media_Player.Extensions
         {
             mediaElement.Metadata.TryGetValue("encoder", out string encoder);
             return encoder;
+        }
+
+        public static StreamInfo GetSelectedAudio(this MediaElement mediaElement)
+        {
+            return mediaElement.MediaInfo.Streams[mediaElement.AudioStreamIndex];
+        }
+
+        public static StreamInfo GetSelectedSubtitle(this MediaElement mediaElement)
+        {
+            return mediaElement.MediaInfo.Streams[mediaElement.SubtitleStreamIndex];
         }
     }
 }
