@@ -18,9 +18,9 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <ffme:MediaElement x:Name="MediaPlayer" Grid.RowSpan="2" LoadedBehavior="Play" AllowDrop="True" Drop="MediaDropped_Drop" MouseDoubleClick="MediaPlayer_MouseDoubleClick" Focusable="False"/>
+        <ffme:MediaElement x:Name="mediaPlayer" Grid.RowSpan="2" LoadedBehavior="Play" AllowDrop="True" Drop="MediaDropped_Drop" MouseDoubleClick="MediaPlayer_MouseDoubleClick" Focusable="False"/>
 
-        <Grid  x:Name="ControlsGrid"  Grid.Row="1">
+        <Grid  x:Name="controlsGrid"  Grid.Row="1">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -28,17 +28,97 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <Slider x:Name="TimeSlider" Grid.Row="1" Maximum="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="#FFCBCBCB" ValueChanged="TimeSlider_ValueChanged" PreviewMouseDown="TimeSlider_PreviewMouseDown" PreviewMouseUp="TimeSlider_PreviewMouseUp"/>
+                <Slider x:Name="timeSlider"
+                        Grid.Row="1" Maximum="1"
+                        Orientation="Horizontal" 
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Center" 
+                        Foreground="#FFCBCBCB"
+                        ValueChanged="TimeSlider_ValueChanged" 
+                        PreviewMouseDown="TimeSlider_PreviewMouseDown" 
+                        PreviewMouseUp="TimeSlider_PreviewMouseUp"/>
             </Grid>
-            <StackPanel x:Name="ControlsPanel" Grid.Row="1" VerticalAlignment="Bottom" Margin="10,5" Orientation="Horizontal">
-                <Button x:Name="PlayButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{StaticResource PlayArrow}" Click="PlayButton_Click" Height="48" Width="75" Focusable="False"/>
-                <Button x:Name="RewindTen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{StaticResource RewindTen}" Click="RewindTen_Click" Height="48" Margin="10,0" Width="75" Focusable="False"/>
-                <Button x:Name="ForwardTen" HorizontalAlignment="Left" VerticalAlignment="Bottom" Content="{StaticResource ForwardTen}" Click="ForwardTen_Click" Height="48" Width="75" Focusable="False"/>
+            <StackPanel x:Name="ControlsPanel"
+                        Grid.Row="1"
+                        VerticalAlignment="Bottom" 
+                        Margin="10,5" 
+                        Orientation="Horizontal">
 
-                <usercontrols:VolumeController x:Name="VolumeController" Margin="10,0" Width="75" Focusable="False"/>
+                <Button x:Name="playButton"
+                        Style="{DynamicResource playerButton}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom" 
+                        Content="{StaticResource PlayArrow}" 
+                        Click="PlayButton_Click"
+                        Focusable="False"/>
+
+                <Button x:Name="RewindTen"
+                        Style="{DynamicResource playerButton}"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Bottom"
+                        Content="{StaticResource RewindTen}"
+                        Click="RewindTen_Click"
+                        Focusable="False"/>
+
+                <Button x:Name="ForwardTen"
+                        HorizontalAlignment="Left" 
+                        VerticalAlignment="Bottom"
+                        Style="{DynamicResource playerButton}"
+                        Content="{StaticResource ForwardTen}"
+                        Click="ForwardTen_Click"
+                        Focusable="False"/>
+
+                <usercontrols:VolumeController x:Name="volumeController"
+                                               Margin="10,0" 
+                                               Width="75"
+                                               Focusable="False"/>
 
             </StackPanel>
-            <Button x:Name="FullscreenButton" Content="{StaticResource EnterFullscreenIcon}" Height="48" Width="75" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,5" Click="FullscreenButton_Click" Focusable="False"/>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom">
+
+                <Button x:Name="mediaInfoPopup"
+                        Content="Info"
+                        Foreground="White"
+                        Style="{StaticResource playerButton}"
+                        Click="mediaInfoPopup_Click"
+                        Focusable="False"/>
+
+                <Button x:Name="FullscreenButton"
+                        Content="{DynamicResource EnterFullscreenIcon}" 
+                        Style="{StaticResource playerButton}"
+                        Click="FullscreenButton_Click"
+                        Focusable="False"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="popupGrid"
+            Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <ContentControl x:Name="mediaPopupBox"
+                            Grid.Column="3"
+                            Grid.ColumnSpan="3"
+                            Grid.Row="3"
+                            Grid.RowSpan="3"
+                            Margin="0,0,10,50"/>
         </Grid>
     </Grid>
 </UserControl>

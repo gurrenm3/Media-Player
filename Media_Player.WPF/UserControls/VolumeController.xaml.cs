@@ -35,7 +35,7 @@ namespace Media_Player.WPF.UserControls
 
         private bool IsMediaPlayerMuted()
         {
-            var player = MainWindow.instance?.mediaPlayerView?.MediaPlayer;
+            var player = MainWindow.instance?.mediaPlayerView?.mediaPlayer;
             return player is null ? false : player.IsMuted;
         }
 

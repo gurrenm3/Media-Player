@@ -51,9 +51,11 @@ namespace Media_Player.WPF
         {
             mediaPlayerView = new MediaPlayerView();
             mediaBrowser = new MediaBrowserView();
-            contentGrid.Children.Add(mediaBrowser);
-            mediaPlayerView.MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
-            mediaPlayerView.MediaPlayer.MediaOpening += MediaPlayer_MediaOpening;
+            
+            //contentGrid.Children.Add(mediaBrowser);
+            contentGrid.Children.Add(mediaPlayerView);
+            mediaPlayerView.mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+            mediaPlayerView.mediaPlayer.MediaOpening += MediaPlayer_MediaOpening;
         }
 
         private void MediaPlayer_MediaOpening(object sender, Unosquare.FFME.Common.MediaOpeningEventArgs e)
@@ -188,12 +190,12 @@ namespace Media_Player.WPF
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            mediaPlayerView.VolumeController.VolumeSlider.Visibility = Visibility.Hidden;
+            mediaPlayerView.volumeController.VolumeSlider.Visibility = Visibility.Hidden;
         }
 
         private async void player_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (mediaPlayerView.MediaPlayer.IsPlaying)
+            if (mediaPlayerView.mediaPlayer.IsPlaying)
                 await mediaPlayerView.Pause();
             else
                 await mediaPlayerView.Play();

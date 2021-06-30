@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Diagnostics;
+using Media_Player.WPF.Extensions;
+using Media_Player.WPF.UserControls;
+using Unosquare.FFME.Common;
+using MediaElement = Unosquare.FFME.MediaElement;
 
 namespace Media_Player.WPF.Views
 {
@@ -14,8 +19,9 @@ namespace Media_Player.WPF.Views
     /// </summary>
     public partial class MediaPlayerView : UserControl
     {
-        public bool IsMediaPlaying { get { return MediaPlayer.IsPlaying; } }
-        string debugMediaPath = @"H:\So I'm a Spider, So What - 12.mp4";
+        public bool IsMediaPlaying { get { return mediaPlayer.IsPlaying; } }
+        //string debugMediaPath = @"H:\So I'm a Spider, So What - 12.mp4";
+        string debugMediaPath = @"H:\My Hero Academia\Season 4\My Hero Academia S04 1080p Dual Audio BDRip 10 bits DD x265-EMBER\S04E03-Boy Meets... [1450FC0B].mkv";
 
         double _heightBeforeFullscreen;
         double _widthBeforeFullscreen;
@@ -32,8 +38,9 @@ namespace Media_Player.WPF.Views
         {
             InitializeComponent();
             HideControls(false);
-            MediaPlayer.AllowDrop = true;
-            MediaPlayer.IsMuted = true;
+            mediaPlayer.AllowDrop = true;
+            mediaPlayer.IsMuted = true;
+            mediaInfoPopup.Visibility = Visibility.Hidden;
         }
 
         private async void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -42,34 +49,39 @@ namespace Media_Player.WPF.Views
             MainWindow.instance.OnExitFullscreen += MainWindow_OnExitFullscreen;
             MainWindow.instance.MouseMove += MainWindow_MouseMove;
             MainWindow.instance.Drop += MediaDropped_Drop;
-            VolumeController.OnVolumeChanged += VolumeController_OnVolumeChanged;
-            VolumeController.OnMuteChanged += VolumeController_OnMuteChanged;
-            MediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
-            MediaPlayer.PositionChanged += MediaPlayer_PositionChanged;
+            volumeController.OnVolumeChanged += VolumeController_OnVolumeChanged;
+            volumeController.OnMuteChanged += VolumeController_OnMuteChanged;
+            mediaPlayer.MediaOpened += MediaPlayer_MediaOpened;
+            mediaPlayer.PositionChanged += MediaPlayer_PositionChanged;
 
             if (File.Exists(debugMediaPath))
             {
-                await MediaPlayer.Open(debugMediaPath);
+                await mediaPlayer.Open(debugMediaPath);
             }
         }
 
         public void HideControls(bool hideCursor = true)
         {
-            ControlsGrid.Visibility = Visibility.Hidden;
+            controlsGrid.Visibility = Visibility.Hidden;
+            popupGrid.Visibility = Visibility.Hidden;
+            HideMediaInfoPopup();
+
             if (hideCursor && MainWindow.instance != null)
                 MainWindow.instance.Cursor = Cursors.None;
         }
 
         public void ShowControls(bool showCursor = true)
         {
-            ControlsGrid.Visibility = Visibility.Visible;
+            controlsGrid.Visibility = Visibility.Visible;
+            popupGrid.Visibility = Visibility.Visible;
+
             if (showCursor && MainWindow.instance != null)
                 MainWindow.instance.Cursor = Cursors.Arrow;
         }
 
         public bool AreControlsVisible(bool includeCursor = true)
         {
-            bool areVisible = ControlsGrid.Visibility == Visibility.Visible;
+            bool areVisible = controlsGrid.Visibility == Visibility.Visible;
             return includeCursor ? (areVisible && MainWindow.instance.Cursor == Cursors.Arrow) : areVisible;
         }
 
@@ -78,46 +90,47 @@ namespace Media_Player.WPF.Views
             if (_isTimeSliderHeld)
                 return;
 
-            var newValue = e.Position.TotalSeconds / MediaPlayer.MediaInfo.Duration.TotalSeconds;
-            TimeSlider.Value = newValue;
+            var newValue = e.Position.TotalSeconds / mediaPlayer.MediaInfo.Duration.TotalSeconds;
+            timeSlider.Value = newValue;
         }
 
         private void MediaPlayer_MediaOpened(object sender, Unosquare.FFME.Common.MediaOpenedEventArgs e)
         {
-            ((Image)PlayButton.Content).SetSource(Properties.Resources.pause_icon);
+            ((Image)playButton.Content).SetSource(Properties.Resources.pause_icon);
+            mediaInfoPopup.Visibility = Visibility.Visible;
         }
 
         public async Task Play()
         {
-            await MediaPlayer.Play();
-            ((Image)PlayButton.Content).SetSource(Properties.Resources.pause_icon);
+            await mediaPlayer.Play();
+            ((Image)playButton.Content).SetSource(Properties.Resources.pause_icon);
         }
 
         public async Task Pause()
         {
-            await MediaPlayer.Pause();
-            ((Image)PlayButton.Content).SetSource(Properties.Resources.play_arrow);
+            await mediaPlayer.Pause();
+            ((Image)playButton.Content).SetSource(Properties.Resources.play_arrow);
         }
 
 
         private void VolumeController_OnMuteChanged(object sender, bool e)
         {
-            MediaPlayer.IsMuted = e;
+            mediaPlayer.IsMuted = e;
         }
 
         private void VolumeController_OnVolumeChanged(object sender, double e)
         {
-            if (MediaPlayer.IsMuted)
-                MediaPlayer.IsMuted = false;
+            if (mediaPlayer.IsMuted)
+                mediaPlayer.IsMuted = false;
 
-            MediaPlayer.Volume = e;
+            mediaPlayer.Volume = e;
         }
 
         private async void MediaDropped_Drop(object sender, DragEventArgs e)
         {
             var files = (string[])e.Data.GetData(DataFormats.FileDrop);
             string file = files[0];
-            await MediaPlayer.Open(file);
+            await mediaPlayer.Open(file);
         }
 
 
@@ -153,28 +166,28 @@ namespace Media_Player.WPF.Views
 
         private void ForwardTen_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer.Position = MediaPlayer.Position.Add(seconds: 10);
+            mediaPlayer.Position = mediaPlayer.Position.Add(seconds: 10);
         }
 
         private void RewindTen_Click(object sender, RoutedEventArgs e)
         {
-            MediaPlayer.Position = MediaPlayer.Position.Subtract(seconds: 10);
+            mediaPlayer.Position = mediaPlayer.Position.Subtract(seconds: 10);
         }
 
         private void MainWindow_OnEnterFullscreen(object sender, EventArgs e)
         {
-            _heightBeforeFullscreen = MediaPlayer.Height;
-            _widthBeforeFullscreen = MediaPlayer.Width;
+            _heightBeforeFullscreen = mediaPlayer.Height;
+            _widthBeforeFullscreen = mediaPlayer.Width;
 
-            MediaPlayer.Height = MainWindow.instance.ActualHeight;
-            MediaPlayer.Width = MainWindow.instance.ActualWidth;
+            mediaPlayer.Height = MainWindow.instance.ActualHeight;
+            mediaPlayer.Width = MainWindow.instance.ActualWidth;
             ((Image)FullscreenButton.Content).SetSource(Properties.Resources.ExitFullscreen_icon);
         }
 
         private void MainWindow_OnExitFullscreen(object sender, EventArgs e)
         {
-            MediaPlayer.Height = _heightBeforeFullscreen;
-            MediaPlayer.Width = _widthBeforeFullscreen;
+            mediaPlayer.Height = _heightBeforeFullscreen;
+            mediaPlayer.Width = _widthBeforeFullscreen;
             ShowControls();
             ((Image)FullscreenButton.Content).SetSource(Properties.Resources.Fullscreen_icon);
         }
@@ -186,7 +199,7 @@ namespace Media_Player.WPF.Views
 
         private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            TimeSlider.Width = ActualWidth - 25;
+            timeSlider.Width = ActualWidth - 25;
         }
 
         bool changingTime = false;
@@ -202,10 +215,10 @@ namespace Media_Player.WPF.Views
 
             await Task.Factory.StartNew(() => Thread.Sleep(5));
 
-            var mediaLength = MediaPlayer.MediaInfo.Duration.TotalSeconds;
-            var newLength = mediaLength * TimeSlider.Value;
+            var mediaLength = mediaPlayer.MediaInfo.Duration.TotalSeconds;
+            var newLength = mediaLength * timeSlider.Value;
 
-            MediaPlayer.Position = new TimeSpan().Add(seconds: (int)newLength);
+            mediaPlayer.Position = new TimeSpan().Add(seconds: (int)newLength);
             changingTime = false;
         }
 
@@ -215,7 +228,7 @@ namespace Media_Player.WPF.Views
             _isTimeSliderHeld = true;
 
 
-            if (MediaPlayer.IsPlaying)
+            if (mediaPlayer.IsPlaying)
             {
                 await Pause();
                 replayOnMouseUp = true;
@@ -235,7 +248,31 @@ namespace Media_Player.WPF.Views
         private void FullscreenButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.instance.Fullscreen = !MainWindow.instance.Fullscreen;
-            MediaPlayer.Focus();
+            mediaPlayer.Focus();
+        }
+
+        private void mediaInfoPopup_Click(object sender, RoutedEventArgs e)
+        {
+            if (mediaPopupBox.Content == null)
+            {
+                ShowMediaInfoPopup();
+            }
+            else
+            {
+                HideMediaInfoPopup();
+            }
+        }
+
+        public void ShowMediaInfoPopup() => ShowMediaInfoPopup(mediaPlayer.MediaInfo, mediaPlayer);
+
+        public void ShowMediaInfoPopup(MediaInfo mediaInfo, MediaElement player)
+        {
+            mediaPopupBox.Content = new MediaInfoPopup(mediaInfo, player);
+        }
+
+        public void HideMediaInfoPopup()
+        {
+            mediaPopupBox.Content = null;
         }
     }
 }

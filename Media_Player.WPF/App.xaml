@@ -10,6 +10,13 @@
                 <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="DeepPurple" SecondaryColor="Lime" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="playerButton" TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                <Setter Property="Height" Value="48"/>
+                <Setter Property="Width" Value="75"/>
+                <Setter Property="Margin" Value="10,0"/>
+                <Setter Property="Background" Value="{StaticResource MaterialDesignDarkBackground}"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
