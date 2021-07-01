@@ -5,7 +5,7 @@ Current progress:
 - Supports:
   - Loading various types of video clips
   - Drag and drop loading
-  - Multiple audio tracks
+  - Video clips with multiple audio tracks
   
   
 ![image](https://github.com/gurrenm3/Media-Player/blob/master/media%20player%20screenshot%202.png)
